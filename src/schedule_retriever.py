@@ -11,7 +11,7 @@ from datetime import datetime
 
 from .config import Config
 
-GOES_URL_FORMAT = "https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=500&locationId={0}&minimum=4"
+GOES_URL_FORMAT = "https://ttp.cbp.dhs.gov/schedulerapi/slots?orderBy=soonest&limit=500&locationId={0}&minimum=1"
 
 
 class ScheduleRetriever:
