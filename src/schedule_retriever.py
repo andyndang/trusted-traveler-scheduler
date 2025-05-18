@@ -174,7 +174,10 @@ class ScheduleRetriever:
             if not schedule:
                 return
 
-            self.notification_handler.new_appointment(location_id, schedule)
+            # Only send notifications if there are at least four appointments on the same day
+            qualifying_days = [s for s in schedule if len(s.appointment_times) >= 4]
+            if qualifying_days:
+                self.notification_handler.new_appointment(location_id, qualifying_days)
             
 
         except OSError:
