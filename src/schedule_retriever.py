@@ -29,6 +29,7 @@ class ScheduleRetriever:
         """
         Evaluates the given timestamp against the provided schedule and location ID. If the timestamp is within the
         acceptable range specified in the configuration, it is added to the schedule.
+        Only appointments on weekends (Saturday or Sunday) are considered.
 
         :param schedule: The current schedule to evaluate the timestamp against.
         :type schedule: List[Schedule]
@@ -40,6 +41,10 @@ class ScheduleRetriever:
         :rtype: List[Schedule]
         """
         parsed_date = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M")
+
+        # Only consider weekends (Saturday=5, Sunday=6)
+        if parsed_date.weekday() not in (5, 6):
+            return schedule
 
         for dates in schedule:
             if dates.appointment_date.date() == parsed_date.date():
